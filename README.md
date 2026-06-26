@@ -2,6 +2,8 @@
 
 A 3D model of the Nissan GTR car made in CAD software (Solidworks)
 
+Print file called NissanGTRprint.3mf
+
 I have attached a link to YouTube video showing 1hr21mins worth of a lapse video that went missing as allowed by Euan 
 
 https://youtu.be/5O45MZOsx5U?si=IXbpGQqVyVIFHzuf
