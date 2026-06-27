@@ -8,6 +8,10 @@ I have attached a link to YouTube video showing 1hr21mins worth of a lapse video
 
 https://youtu.be/5O45MZOsx5U?si=IXbpGQqVyVIFHzuf
 
+Below is a 360 view of model
+
+https://youtu.be/es8b3FC-_y8
+
 NOTE: I do not have a 3D printer (yet) so cannot provide a picture of the physical model or recommend settings but I have used bambu slicer and sliced the model with no issues using auto tree supports 
 
 <img width="1025" height="845" alt="image" src="https://github.com/user-attachments/assets/eccecca3-c8e9-433e-ba0f-4916b393bd04" />
