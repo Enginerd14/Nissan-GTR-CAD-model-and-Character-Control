@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Nissan GTR Drive - Character Controlling</title>
+    <style>
+      body { margin: 0; overflow: hidden;}
+      canvas { display: block; }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from 'three';
+      import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+
+
+      console.log("script running")
+      
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x87CEEB);
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+      const Renderer = new THREE.WebGLRenderer();
+      Renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild( Renderer.domElement );
+
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 10, 5);
+      scene.add(light);
+
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      scene.add(ambientLight)
+
+      const GrassGeometry = new THREE.PlaneGeometry(200, 200);
+      const GrassMaterial = new THREE.MeshStandardMaterial({ color: 0x4a7c3a });
+      const grass = new THREE.Mesh(GrassGeometry, GrassMaterial);
+      grass.rotation.x = -Math.PI / 2
+      grass.position.y = -0.01
+      scene.add(grass);
+
+      const RdGeometry = new THREE.PlaneGeometry(10, 200);
+      const RdMaterial = new THREE.MeshStandardMaterial({ color: 0x333333 });
+      const Rd = new THREE.Mesh(RdGeometry, RdMaterial);
+      Rd.rotation.x = -Math.PI / 2
+      scene.add(Rd);
+      
+      let car;
+      const loader = new GLTFLoader();
+      loader.load('NissanGTRglb.glb', (gltf) => { 
+        car = gltf.scene; 
+        car.scale.set(5, 5, 5);
+        car.position.set(0,0,-10)
+        scene.add(car); 
+        console.log("Car load success, CarPos: ", car.position.x, car.position.z);
+      });
+
+      camera.position.set(0, 5, 10);
+      camera.lookAt(0, 0, 0);
+
+      const keys = {}
+      document.addEventListener('keydown',(e) => { keys[e.key] = true });
+      document.addEventListener('keyup',(e) => { keys[e.key] = false });
+
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        if (car) {
+          const speed = 0.1;
+          const turnSpeed = 0.03
+
+        if (keys['ArrowUp']) {
+          car.position.x += Math.sin(car.rotation.y) *speed;
+          car.position.z += Math.cos(car.rotation.y) *speed;
+        }
+
+        if (keys['ArrowDown']) {
+          car.position.x -= Math.sin(car.rotation.y) *speed;
+          car.position.z -= Math.cos(car.rotation.y) *speed;
+        }
+
+        if (keys['ArrowLeft']) {
+          car.position.x -= turnSpeed;
+        }
+
+        if (keys['ArrowRight']) {
+          car.position.x += turnSpeed;
+        }
+
+        // Preventing car from going onto grass
+        if (car.position.x > 4) car.position.x = 4;
+        if (car.position.x < -4) car.position.x = -4;
+
+        // Preventing car from going off screen
+        if (car.position.z > 5) car.position.z = 5;
+        if (car.position.z < -90) car.position.z = -90;
+        }
+
+        Renderer.render(scene, camera);
+      }
+      animate()
+
+    </script>
+  </body>
+</html>
