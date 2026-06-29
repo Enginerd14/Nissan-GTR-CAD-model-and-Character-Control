@@ -23,4 +23,9 @@ Driveable Nissan GTR using three.js with model of car made in CAD
 
 Uses arrow keys to move model and prevents car from moving past camera and moving onto grass
 
+
+Below is a demo link of the model being controlled by arrow keys
+
+https://enginerd14.github.io/Nissan-GTR-CAD-model-and-Character-Control/
+
 <img width="2540" height="1256" alt="image" src="https://github.com/user-attachments/assets/a88a3f70-147a-49f2-853e-5015a09cca46" />
